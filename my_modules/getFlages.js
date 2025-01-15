@@ -1,4 +1,3 @@
-
 function getFlages() {
   const ARGV = [...process.argv] ;
   const ARGV_LEN = ARGV.length;
@@ -8,7 +7,11 @@ function getFlages() {
   let flageValue = "";
   for (let index = 0; index < ARGV_LEN; index++) {
 
-    if ( ARGV[index][0] !== '-') {
+    if ( ARGV[index][0] !== '-'  ) {
+      continue;
+    }
+    
+    if ( ARGV[index][1] === '-'  ) {
       continue;
     }
 

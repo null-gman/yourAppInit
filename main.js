@@ -1,39 +1,59 @@
-const Print = require("./my_modules/print");
 const FILES = require("./my_modules/files");
+
+// Flags should follow this format: 
+//   -<flag> value  or  -<flag> "value value"  
+// 
+// Note: 
+//   - "- flag" (with a space between '-' and the flag name) is NOT allowed.
+//   - "--flag" (without space) is allowed.
+//   - "-- flag" (with space between '--' and flag name) is NOT allowed.
+
+
+/* 
+ * This object contains methods to add files and initialize (build or start) your app.
+ *
+ * Methods:
+ * 
+ *  - FILES.getFlags()  
+ *      // Retrieves the flags passed as arguments when running the app.
+ * 
+ *  - FILES.addFile(flag: string, defaultName: string, extension: string, callBackFun: function) 
+ *      // Adds a file to the system.
+ *      // Parameters:
+ *      //   - flag: If this flag exists, the file name will use its value; otherwise, the default name is used.
+ *      //   - defaultName: The default file name.
+ *      //   - extension: The file extension.
+ *      //   - callBackFun: A callback function that provides the file's content.
+ *      //                 This function will be executed when FILES.start() is called 
+ *      //                 or with the specified flags to generate content dynamically.
+ * 
+ *      // Do not call this method after invoking FILES.start().
+ *
+ *  - FILES.start() 
+ *      // Initializes your app in the current directory.
+ */
 
 
 async function main() {
-
   const Flages = FILES.getFlages();
 
+  // Example:
+  // -main_c <fileName> 
+  // If no flag or no value is provided, "main" will be used as the default.
 
-  FILES.addFile("c", "main", "c", () => {
-    return `#include <stdio.h>\n#include <stdlib.h>\n\nvoid main()\n{\n\n\tprintf("hello c");\n\n}`;
-  });
-  FILES.addFile("h", "my_libs", "h", () => {
-    return `//hello world`;
-  });
-  FILES.addFile("b", "run", "bat", () => {
-    return `gcc -o ${Flages["o"] || "app"}.exe ${Flages["c"] || "main"}.c && ${Flages["o"] || "app"}.exe`;
+  FILES.addFile("main_c", "main", "c", () => {
+    return `#include <stdio.h>\n#include <stdlib.h>\n\nvoid main()\n{\n\tprintf("hello c");\n}`;
   });
 
+  FILES.addFile("compile_bat", "run", "bat", () => {
+    return `gcc -o ${Flages.exe || "app"}.exe ${Flages["main_c"] || "main"}`;
+  });
 
-//   FILES.addFile("js", "mainCompile", "js", () => {
-//     return `
-//     const { exec } = require("child_process");\n
-//     const files = ["main.c"];\n
-//     files.push("your C file ");\n
-//     let fullCommand = "gcc -o app.exe";
-//     function setGcc(files) {for (let file of files) {fullCommand += " " + file;}return fullCommand;}\n
-//     function execFun() {let cmdCommnd = setGcc(files);console.log(\`command : \'runing\'\n\n\`);exec(cmdCommnd, (error) => {if (error) {console.error(\`\nexec error:\n -> \${error} ~~END\n\n\`);return; }console.log(\`end of exec .\`);});}\nexecFun();
-// `;
-//   });
+  // Cool, right?!
+  // You can use flags to customize the content. 
+  // That's why it's designed as a callback. :> 
 
-
-  FILES.start()
-
-
-
+  FILES.start();
 }
 
 main();
