@@ -1,0 +1,11 @@
+{
+  "name": "yourappinit",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "build" : "pkg main.js --target node18-win-x64 --output myapp.exe"
+  },
+  "dependencies": {
+    "pkg": "^5.8.1"
+  }
+}
