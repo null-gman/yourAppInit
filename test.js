@@ -18,9 +18,9 @@ const FILES = require("./my_modules/files");
  *      // Retrieves the flags passed as arguments when running the app.
  * 
  *  - FILES.addFile(flag: string, defaultName: string, extension: string, callBackFun: function) 
- *      // Adds a file to the system.
+ *      // Adds a file to the curnnt working directory.
  *      // Parameters:
- *      //   - flag: If this flag exists, the file name will use its value; otherwise, the default name is used.
+ *      //   - flag: If the flag is used , the file name will use its value; otherwise, the default name is used.
  *      //   - defaultName: The default file name.
  *      //   - extension: The file extension.
  *      //   - callBackFun: A callback function that provides the file's content.

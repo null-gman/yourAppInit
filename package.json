@@ -2,6 +2,7 @@
   "name": "yourappinit",
   "version": "1.0.0",
   "main": "main.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node test.js"
   }
