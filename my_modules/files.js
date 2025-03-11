@@ -17,7 +17,7 @@ class _FILES {
 
 
     this.addFile = (flage,name,exe,containt) => {
-      if (!flage || !name || !exe || !containt) {
+      if (!flage || !name ) {
         throw new Error("");
       }
       let file = new _FILE(flage,name,exe,containt);

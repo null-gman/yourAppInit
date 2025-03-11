@@ -2,8 +2,10 @@ const fs = require("node:fs");
 const Print = require ("./print");
 
 async function createFile(fileName, containt) {
-  if (!fileName||!containt) {
-    throw new Error("fileName or containt are empty");
+  
+  
+  if (!fileName) {
+    throw new Error("fileName are empty");
   }
 
   const fileExistCode = await fileExist(fileName);
@@ -14,6 +16,7 @@ async function createFile(fileName, containt) {
 
   
   return new Promise((resolve) => {
+    containt = containt ? containt : "";
     fs.writeFile("./"+fileName, containt, (err) => {
       if (err) resolve(0);
       Print.green(`file '${fileName}' was created .`)
