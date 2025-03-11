@@ -37,9 +37,6 @@ function getFlages() {
   
 }
 
-  return res;
-
-}
 
 
 module.exports = {getFlages};
