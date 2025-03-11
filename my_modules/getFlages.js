@@ -1,3 +1,5 @@
+/*  my_modules/getFlages.js */
+
 function getFlages() {
   const ARGV = [...process.argv] ;
   const ARGV_LEN = ARGV.length;
@@ -11,18 +13,19 @@ function getFlages() {
       continue;
     }
     
-    if ( ARGV[index][1] === '-'  ) {
+    if ( ARGV[index] === "-"  ) {
       continue;
     }
 
-    if (! ARGV[index + 1]) {
+    if (!ARGV[index + 1]) {
       continue;
     }
+    
     if (ARGV[index + 1][0] === '-') {
       continue;
     }
 
-    flageName = remove0char(ARGV[index]);
+    flageName = (String(ARGV[index])).slice(1);
     flageName = flageName.toLocaleLowerCase();
     
     flageValue = ARGV[index + 1];
@@ -34,12 +37,6 @@ function getFlages() {
   
 }
 
-
-function remove0char(string) {
-  let res = "";
-  for (let i = 1; i < string.length ; i++) {
-    res += string[i];
-  }
   return res;
 
 }
