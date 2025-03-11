@@ -65,7 +65,10 @@ class _FILE {
     let fileName = getValueFormFlage(flage) || name;
 
     this.flage = flage;
-    this.name = fileName + "." + exe;
+    this.name = fileName;
+    if (exe) {
+      this.name += "." + exe;
+    }
 
     isFileOverwrite(flage, this.name)
 
